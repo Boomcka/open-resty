@@ -157,10 +157,11 @@ RUN apk add --no-cache --virtual .build-deps \
         openresty-${RESTY_VERSION}.tar.gz openresty-${RESTY_VERSION} \
     && apk del .build-deps \
     && mkdir -p /var/run/openresty \
-    && ln -sf /dev/stdout /usr/local/openresty/nginx/logs/access.log \
-    && ln -sf /dev/stderr /usr/local/openresty/nginx/logs/error.log \
-    && apk add --no-cache bash
-# Add additional binaries into PATH for convenience
+    # && ln -sf /dev/stdout /usr/local/openresty/nginx/logs/access.log \
+    # && ln -sf /dev/stderr /usr/local/openresty/nginx/logs/error.log \
+    && apk add --no-cache bash 
+    
+    # Add additional binaries into PATH for conveniences
 ENV PATH=$PATH:/usr/local/openresty/luajit/bin:/usr/local/openresty/nginx/sbin:/usr/local/openresty/bin
 
 # Copy nginx configuration files
