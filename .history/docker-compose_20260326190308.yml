@@ -1,0 +1,15 @@
+8version: "3.9"
+
+services:
+  openresty:
+    image: openresty/openresty:latest
+    ports:
+      - "8080:80"
+    volumes:
+      - ./openresty/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf
+      - ./openresty/conf.d:/etc/nginx/conf.d
+    depends_on:
+      - python
+
+  python:
+    build: ./python
