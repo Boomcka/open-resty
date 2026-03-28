@@ -1,15 +1,25 @@
-version: "3.9"
-
 services:
-  openresty:
-    image: openresty/openresty:latest
-    ports:
-      - "8080:80"
-    volumes:
-      - ./openresty/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf
-      - ./openresty/conf.d:/etc/nginx/conf.d
-    depends_on:
-      - python
-
   python:
     build: ./python
+    container_name: open-resty_python
+    ports:
+      - "5000:5000"       # для отладки напрямую, можно убрать
+    networks:
+      - backend_net
+
+  openresty:
+    image: openresty/openresty:latest
+    container_name: open-resty_openresty
+    ports:
+      - "8080:80"         # доступ с браузера
+    volumes:
+    - ./openresty/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf:ro
+    - ./openresty/conf.d:/usr/local/openresty/nginx/conf/conf.d:ro
+    depends_on:
+      - python
+    networks:
+      - backend_net
+
+networks:
+  backend_net:
+    driver: bridge
