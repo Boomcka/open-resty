@@ -8,7 +8,8 @@ This is a sandbox demo showing how to limit requests per second (RPS) for users 
 
 - The system may have **compromised users**.  
 - Even with correct login credentials, an attacker could **flood endpoints**.  
-- Using a simple Lua  **RPS throttling**, we can protect the system from overload  
+- Using a simple Lua **RPS throttling**, we can protect the system from overload.  
+- This demo highlights **backend resilience**, not full security auditing.
 
 ---
 
@@ -18,7 +19,7 @@ This is a sandbox demo showing how to limit requests per second (RPS) for users 
 - **OpenResty frontend**: Proxies requests to Python backend.  
 - **Lua RPS limiter**:
   - Configured for a single location (`/`).
-  - Limits requests per user login via Redis.
+  - Limits requests per user login.
   - Memory reserved per key: **1MB**.
 - **Load testing**: Demonstrated with `hey` tool to simulate `429 Too Many Requests` responses.
 
